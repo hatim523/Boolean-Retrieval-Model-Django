@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Query Results</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Style the side navigation */
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+}
+
+
+/* Side navigation links */
+.sidenav p {
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.sidenav p:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Side navigation links */
+.sidenav a {
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color on hover */
+.sidenav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Style the content */
+.content {
+  margin-left: 200px;
+  padding-left: 20px;
+}
+
+.info {
+  margin-bottom: 15px;
+  padding: 4px 12px;
+  background-color: #e7f3fe;
+  border-left: 6px solid #2196F3;
+}
+</style>
+</head>
+<body>
+
+<div class="sidenav">
+    <p>Query Type: <strong>{{ query_type }}</strong></p>
+    <p>Results Fetched: <strong>{{ num_results }}</strong></p>
+    <p>Time Elapsed: <strong>{{ time_taken }}</strong></p>
+    <a href="{% url 'search:index' %}"><i>Search Again?</i></a>
+</div>
+
+<div class="content">
+  <h2>Search Results</h2>
+    <p>Query: <strong>{{ query_text }}</strong></p>
+
+    {% for key, value in doc_lines.items %}
+        <div class="info">
+          <p align="center"><strong>Speech {{ key }}</strong></p>
+            <ul>
+            {% for line in value %}
+                <li><p>...{{ line }}...</p></li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</div>
+
+
+</body>
+</html>
